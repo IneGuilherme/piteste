@@ -1,69 +1,36 @@
-'use client';
+import { AuthTabs } from "@/components/auth/auth-tabs"; // Componente das abas Login/Cadastro
+import { Sprout } from "lucide-react"; // Ícone (precisa ter lucide-react instalado)
+import Link from "next/link";
 
-import Image, { ImageLoader } from "next/image";
-import { InputText } from "../components/InputText";
-import Button from 'react-bootstrap/Button';
-import { redirect } from "next/navigation";
-import styles from '@/styles/Login.module.css';
-
-
-export default function Login() {
-  let name: string;
-  // atribuição
-  name = "João";
-  
-  // declaração de variável numérica
-  const idade: number = 15;
-
-  // if-else: utilizado quando a lógica é muito complexa
-  // let message: string;
-  // if(idade < 18)
-  //   message = "é menor de idade";
-  // else
-  //   message = "é maior de idade";
-
-  // { name } => permite acessar a variável "name" dentro de um componente
-  
-  // React Fragment <></>
+/**
+ * Página de autenticação principal (/), mostrando as opções de Login e Cadastro.
+ */
+export default function LoginPage() {
   return (
-    <>
-      {/* Exemplo de uso condicional */}
-      {/* 
-      <h1>{name}</h1>
-      <h2>
-        {idade < 18 ? (
-          <span style={{ color: "red", fontWeight: "bold" }}>É menor de idade</span>
-        ) : (
-          <span style={{ color: "purple" }}>Maior de idade</span>
-        )}
-      </h2>
-      */}
-
-      <div className={styles.background}>
-        
-        <div>
-          <InputText
-            label="usuário:"
-            inputName="username"
-            placeholder="Nome do usuário"
-            id="user"
-          />
-          <br />
-          <InputText
-            label="Senha:"
-            inputName="senha"
-            placeholder="Senha"
-            id="senha"
-          />
-
-          <br />
-          <br />
-
-          <Button variant="primary" onClick={() => redirect("/home")}>
-            Entrar
-          </Button>
-        </div>
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-primary/5 to-transparent p-4">
+      {/* Logo e título simples */}
+      <div className="mb-8 text-center">
+        <Link href="/" className="inline-flex items-center gap-2 mb-4">
+          {/* Ícone simples no lugar do logo complexo */}
+          <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary">
+            <Sprout className="h-7 w-7 text-primary-foreground" />
+          </div>
+          <span className="text-2xl font-bold text-primary">
+            Projeto Integrador
+          </span>
+        </Link>
+        <p className="text-muted-foreground">Acesse sua conta ou cadastre-se</p>
       </div>
-    </>
+
+      {/* Componente que renderiza as abas de Login e Cadastro */}
+      <AuthTabs />
+
+      {/* Link para voltar (opcional, já que estamos na raiz) */}
+      {/*
+      <Link href="/" className="mt-6 text-sm text-muted-foreground hover:text-foreground transition-colors">
+        ← Voltar para a página inicial
+      </Link>
+       */}
+    </div>
   );
 }
